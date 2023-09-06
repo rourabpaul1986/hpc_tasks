@@ -1,0 +1,5 @@
+log_data/sample.txt, 36, 48, 48,1
+log_data/sample.txt, 9, 48, 48,2
+log_data/sample.txt, 3, 48, 48,3
+cnn_data/sample_run.txt, 1, 24, 72,1
+cnn_data/sample_run.txt, 23, 24, 72,3
