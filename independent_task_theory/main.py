@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from task_share import *
 from task_fit_check import *
 from sort import *
-from power_opt1 import *
+from power_opt import *
 from fpga_script import *
 import itertools
 

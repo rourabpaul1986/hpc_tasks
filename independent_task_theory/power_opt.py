@@ -23,7 +23,7 @@ def fetch_csv_row(file_path, row_number):
 
 
 #etw defines how far work is done in previous fpga and eti next task
-def fpga(tasks, sti, stw, task_int, task_length, tcfg, tslr, ii_column):
+def fpga(no_fpga, nf, tasks, sti, stw, task_int, task_length, tcfg, tslr, ii_column):
    #f = open("tasks.csv", "r")
    #task_set = list(csv.reader(f, delimiter=","))
    task_set=tasks
@@ -54,23 +54,31 @@ def fpga(tasks, sti, stw, task_int, task_length, tcfg, tslr, ii_column):
       stw=0
       #print(rc)
       #if rc<=tcfg and rc>=0 or rc<=int(task_set[i+1][ii_column]) and rc>=0 :
-      if rc<=(tcfg + int(task_set[i+1][ii_column])) and rc>=0 :
+      if rc<=tcfg and rc>=0 :#reconfiguration time available for next task,go to next fpga
+        print("inside range"+str(rc))
         eti=i+1
         etw=0
         break
-      if rc<0:
+      #if rc<0:##entire task not fitted in current FPGA, pass same task i to next FPGA
+      if rc<0 and rc1 >tcfg+int(task_set[i+1][ii_column]):##entire task not fitted in current FPGA, pass same task i to next FPGA
+        print("negative"+str(rc))
         eti=i
         etw=rc1-tcfg+stw1
-        break        
-      if rc>=0 and i==task_length:
-        eti=0
+        break  
+      if rc<0 and rc1 <=tcfg+int(task_set[i+1][ii_column]):##entire task not fitted in current FPGA, pass same task i to next FPGA
+        print("II not fitted"+str(rc))
+        eti=i
         etw=0
-        break       
+        break               
+      if rc>=0 and i==task_length:
+        eti=i
+        etw=0
+        break      
 
         
    return eti, etw 
 
-def Power_Opt(tasks, tcfg, tslr,nf, length, ii_column):
+def Power_Opt(tasks, tcfg, tslr, nf, length, ii_column):
  r=0
  rank_1=0
  f = open("sorted_fitted.csv", "r")
@@ -86,16 +94,17 @@ def Power_Opt(tasks, tcfg, tslr,nf, length, ii_column):
   stw=0
   for i in range(0, nf): # for nf FPGAs
     print("*********FPGA"+str(i)+"***********")
-    sti, stw=fpga(tasks, int(sti), int(stw), task_int[k], length, tcfg, tslr, ii_column)
-    if sti==0 and stw==0:
+    sti, stw=fpga(i, nf, tasks, int(sti), int(stw), task_int[k], length, tcfg, tslr, ii_column)
+    if sti==length and stw==0:
      if rank_1==0 :
-       rank_1=k
+       rank_1=k+1 ##task Share loop started from 0
      print("***************************")
      print("Completion of T"+str(sti)+" in Current FPGA : "+str(stw))
      print("Number of FPGA Required to Map Given Tasks Set "+str(i+1) )
      print("***************************")
      break
-    elif sti-stw!=0 and i==nf-1: 
+    #elif sti-stw!=0 and i==nf-1: 
+    elif sti<length and stw!=0 and i==nf-1: 
      print("*********Task Set Rejected***********")
      print("Next Task : T"+str(sti))
      print("Completion of T"+str(sti)+" in Current FPGA : "+str(stw))
@@ -109,9 +118,9 @@ def Power_Opt(tasks, tcfg, tslr,nf, length, ii_column):
 
  not_fit = "not_fitted.csv" 
  fit = "fitted.csv"  
- nf = count_csv_rows(not_fit)
+ nfit = count_csv_rows(not_fit)
  fit = count_csv_rows(fit)
- print("Number of Not Fitted Task", nf+r)
+ print("Number of Not Fitted Task", nfit+r)
  print("Number of Fitted Task", fit-r)
  print("The Row Index of Selected Low Power Task", rank_1)
  
