@@ -1,0 +1,9 @@
+Tasks,"xclbin location
+(without file name)",xclbin command,"data location
+(with file name)",data command,host file location,host file command,p,II,Data(GB),CU,Throughput(GB),,,
+lz4,/xclbin/,-xbin,/lz4_data/sample_run.txt,-c,/host/,,60,2,24,2,0.5,1,,
+dup,/xclbin/,-xbin,/dup_data/sample_run.dat,-in,/host/,,60,4,18,4,0.5,1,1.5,2
+log,/xclbin/,-xbin,/log_data/sample_run.csv,-in,/host/,,60,2,48,4,1,2,3,4
+vadd,/xclbin/,-xbin,,,/host/,,90,4,36,4,0.25,0.5,0.75,1
+cnn,/xclbin/,-xbin,/cnn_data/sample_run.csv,-in,/host/,,90,6,72,4,1,2,3,4
+aes,/xclbin/,-xbin,/aes_data/sample_run.csv,-in,/host/,,90,6,72,2,1,2,,
