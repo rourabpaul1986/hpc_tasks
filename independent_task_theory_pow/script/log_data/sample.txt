@@ -1,0 +1,32 @@
+/*1
+ *2(c) Copyright 2019 Xilinx, Inc. All rights reserved.
+ *3
+ *4 Licensed under the Apache License, Version 2.0 (the "License");
+ *5 you may not use this file except in compliance with the License.
+ *6 You may obtain a copy of the License at
+ *7
+ *8     http://www.apache.org/licenses/LICENSE-2.0
+ *9
+ *10 Unless required by applicable law or agreed to in writing, software
+ *11 distributed under the License is distributed on an "AS IS" BASIS,
+ *12 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *13 See the License for the specific language governing permissions and
+ *14 limitations under the License.
+ *15
+ */16
+/*17
+ *18 (c) Copyright 2019 Xilinx, Inc. All rights reserved.
+ *19
+ *20 Licensed under the Apache License, Version 2.0 (the "License");
+ *21 you may not use this file except in compliance with the License.
+ *22 You may obtain a copy of the License at
+ *23
+ *24     http://www.apache.org/licenses/LICENSE-2.0
+ *25
+ *26 Unless required by applicable law or agreed to in writing, software
+ *27 distributed under the License is distributed on an "AS IS" BASIS,
+ *28 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *29 See the License for the specific language governing permissions and
+ *30 limitations under the License.
+ *31
+ *32/
